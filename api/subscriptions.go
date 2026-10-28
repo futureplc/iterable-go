@@ -20,9 +20,9 @@ type Subscriptions struct {
 	api *apiClient
 }
 
-func NewSubscriptionsApi(apiKey string, httpClient *http.Client, logger logger.Logger, limiter rate.Limiter) *Subscriptions {
+func NewSubscriptionsApi(apiKey string, httpClient *http.Client, logger logger.Logger, limiter rate.Limiter, opts ...Option) *Subscriptions {
 	return &Subscriptions{
-		api: newApiClient(apiKey, httpClient, logger, limiter),
+		api: newApiClient(apiKey, httpClient, logger, limiter, opts...),
 	}
 }
 

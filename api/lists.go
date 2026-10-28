@@ -25,9 +25,9 @@ type Lists struct {
 	api *apiClient
 }
 
-func NewListsApi(apiKey string, httpClient *http.Client, logger logger.Logger, limiter rate.Limiter) *Lists {
+func NewListsApi(apiKey string, httpClient *http.Client, logger logger.Logger, limiter rate.Limiter, opts ...Option) *Lists {
 	return &Lists{
-		api: newApiClient(apiKey, httpClient, logger, limiter),
+		api: newApiClient(apiKey, httpClient, logger, limiter, opts...),
 	}
 }
 

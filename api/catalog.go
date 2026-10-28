@@ -23,9 +23,9 @@ type Catalog struct {
 	api *apiClient
 }
 
-func NewCatalogApi(apiKey string, httpClient *http.Client, logger logger.Logger, limiter rate.Limiter) *Catalog {
+func NewCatalogApi(apiKey string, httpClient *http.Client, logger logger.Logger, limiter rate.Limiter, opts ...Option) *Catalog {
 	return &Catalog{
-		api: newApiClient(apiKey, httpClient, logger, limiter),
+		api: newApiClient(apiKey, httpClient, logger, limiter, opts...),
 	}
 }
 

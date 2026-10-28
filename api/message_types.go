@@ -16,9 +16,9 @@ type MessageTypes struct {
 	api *apiClient
 }
 
-func NewMessageTypesApi(apiKey string, httpClient *http.Client, logger logger.Logger, limiter rate.Limiter) *MessageTypes {
+func NewMessageTypesApi(apiKey string, httpClient *http.Client, logger logger.Logger, limiter rate.Limiter, opts ...Option) *MessageTypes {
 	return &MessageTypes{
-		api: newApiClient(apiKey, httpClient, logger, limiter),
+		api: newApiClient(apiKey, httpClient, logger, limiter, opts...),
 	}
 }
 

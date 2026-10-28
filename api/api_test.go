@@ -105,6 +105,28 @@ func Test_getJson(t *testing.T) {
 	}
 }
 
+func TestDirectAPIWithEU(t *testing.T) {
+	c := httpClient([]byte(`{"channels":[]}`), http.StatusOK, nil)
+	channels := NewChannelsApi(testApiKey, c, &logger.Noop{}, &rate.NoopLimiter{}, WithEU())
+	_, err := channels.Channels()
+	assert.NoError(t, err)
+	assert.Equal(t, "https://api.eu.iterable.com/api/channels", c.Transport.(*testTransport).Url())
+}
+
+func TestEUPagination(t *testing.T) {
+	transport := &scriptedTransport{bodies: [][]byte{
+		[]byte(`{"nextPageUrl":"/api/campaigns?page=2"}`),
+		[]byte(`{}`),
+	}}
+	campaigns := NewCampaignsApi(testApiKey, &http.Client{Transport: transport}, &logger.Noop{}, &rate.NoopLimiter{}, WithEU())
+	_, err := campaigns.All()
+	require.NoError(t, err)
+	assert.Equal(t, []string{
+		"https://api.eu.iterable.com/api/campaigns?page=1&pageSize=1000&sort=id",
+		"https://api.eu.iterable.com/api/campaigns?page=2",
+	}, transport.urls)
+}
+
 func Test_sendJson_emptyAcceptedResponse(t *testing.T) {
 	c := httpClient(nil, http.StatusAccepted, nil)
 	api := newApiClient(testApiKey, c, &logger.Noop{}, &rate.NoopLimiter{})

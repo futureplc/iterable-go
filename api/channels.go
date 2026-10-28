@@ -18,9 +18,9 @@ type Channels struct {
 	api *apiClient
 }
 
-func NewChannelsApi(apiKey string, httpClient *http.Client, logger logger.Logger, limiter rate.Limiter) *Channels {
+func NewChannelsApi(apiKey string, httpClient *http.Client, logger logger.Logger, limiter rate.Limiter, opts ...Option) *Channels {
 	return &Channels{
-		api: newApiClient(apiKey, httpClient, logger, limiter),
+		api: newApiClient(apiKey, httpClient, logger, limiter, opts...),
 	}
 }
 

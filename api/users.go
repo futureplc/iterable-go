@@ -40,9 +40,9 @@ type Users struct {
 	api *apiClient
 }
 
-func NewUsersApi(apiKey string, httpClient *http.Client, logger logger.Logger, limiter rate.Limiter) *Users {
+func NewUsersApi(apiKey string, httpClient *http.Client, logger logger.Logger, limiter rate.Limiter, opts ...Option) *Users {
 	return &Users{
-		api: newApiClient(apiKey, httpClient, logger, limiter),
+		api: newApiClient(apiKey, httpClient, logger, limiter, opts...),
 	}
 }
 

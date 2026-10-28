@@ -26,9 +26,9 @@ type Campaigns struct {
 	api *apiClient
 }
 
-func NewCampaignsApi(apiKey string, httpClient *http.Client, logger logger.Logger, limiter rate.Limiter) *Campaigns {
+func NewCampaignsApi(apiKey string, httpClient *http.Client, logger logger.Logger, limiter rate.Limiter, opts ...Option) *Campaigns {
 	return &Campaigns{
-		api: newApiClient(apiKey, httpClient, logger, limiter),
+		api: newApiClient(apiKey, httpClient, logger, limiter, opts...),
 	}
 }
 
