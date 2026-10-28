@@ -26,7 +26,12 @@ type Events struct {
 	api *apiClient
 }
 
-func NewEventsApi(apiKey string, httpClient *http.Client, logger logger.Logger, limiter rate.Limiter, opts ...Option) *Events {
+func NewEventsApi(apiKey string, httpClient *http.Client, logger logger.Logger, limiter rate.Limiter) *Events {
+	return NewEventsApiWithOptions(apiKey, httpClient, logger, limiter)
+}
+
+// NewEventsApiWithOptions creates an events API with the given options.
+func NewEventsApiWithOptions(apiKey string, httpClient *http.Client, logger logger.Logger, limiter rate.Limiter, opts ...Option) *Events {
 	return &Events{
 		api: newApiClient(apiKey, httpClient, logger, limiter, opts...),
 	}

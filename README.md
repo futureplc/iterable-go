@@ -93,7 +93,8 @@ The `NewClient` function accepts various configuration options to customize the 
 
 For EU projects, use `iterable_go.NewClient("your-eu-api-key", iterable_go.WithEU())`.
 Batch operations use the same region as their client. If constructing APIs directly
-from the `api` package, pass `api.WithEU()` to their constructors.
+from the `api` package, use the `WithOptions` constructor, for example
+`api.NewChannelsApiWithOptions(key, httpClient, logger, limiter, api.WithEU())`.
 
 **Example:**
 ```go

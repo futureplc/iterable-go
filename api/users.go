@@ -40,7 +40,12 @@ type Users struct {
 	api *apiClient
 }
 
-func NewUsersApi(apiKey string, httpClient *http.Client, logger logger.Logger, limiter rate.Limiter, opts ...Option) *Users {
+func NewUsersApi(apiKey string, httpClient *http.Client, logger logger.Logger, limiter rate.Limiter) *Users {
+	return NewUsersApiWithOptions(apiKey, httpClient, logger, limiter)
+}
+
+// NewUsersApiWithOptions creates a users API with the given options.
+func NewUsersApiWithOptions(apiKey string, httpClient *http.Client, logger logger.Logger, limiter rate.Limiter, opts ...Option) *Users {
 	return &Users{
 		api: newApiClient(apiKey, httpClient, logger, limiter, opts...),
 	}

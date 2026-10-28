@@ -18,7 +18,12 @@ type Templates struct {
 	api *apiClient
 }
 
-func NewTemplatesApi(apiKey string, httpClient *http.Client, logger logger.Logger, limiter rate.Limiter, opts ...Option) *Templates {
+func NewTemplatesApi(apiKey string, httpClient *http.Client, logger logger.Logger, limiter rate.Limiter) *Templates {
+	return NewTemplatesApiWithOptions(apiKey, httpClient, logger, limiter)
+}
+
+// NewTemplatesApiWithOptions creates a templates API with the given options.
+func NewTemplatesApiWithOptions(apiKey string, httpClient *http.Client, logger logger.Logger, limiter rate.Limiter, opts ...Option) *Templates {
 	return &Templates{
 		api: newApiClient(apiKey, httpClient, logger, limiter, opts...),
 	}

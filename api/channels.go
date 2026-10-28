@@ -18,7 +18,12 @@ type Channels struct {
 	api *apiClient
 }
 
-func NewChannelsApi(apiKey string, httpClient *http.Client, logger logger.Logger, limiter rate.Limiter, opts ...Option) *Channels {
+func NewChannelsApi(apiKey string, httpClient *http.Client, logger logger.Logger, limiter rate.Limiter) *Channels {
+	return NewChannelsApiWithOptions(apiKey, httpClient, logger, limiter)
+}
+
+// NewChannelsApiWithOptions creates a channels API with the given options.
+func NewChannelsApiWithOptions(apiKey string, httpClient *http.Client, logger logger.Logger, limiter rate.Limiter, opts ...Option) *Channels {
 	return &Channels{
 		api: newApiClient(apiKey, httpClient, logger, limiter, opts...),
 	}

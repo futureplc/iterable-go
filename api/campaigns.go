@@ -26,7 +26,12 @@ type Campaigns struct {
 	api *apiClient
 }
 
-func NewCampaignsApi(apiKey string, httpClient *http.Client, logger logger.Logger, limiter rate.Limiter, opts ...Option) *Campaigns {
+func NewCampaignsApi(apiKey string, httpClient *http.Client, logger logger.Logger, limiter rate.Limiter) *Campaigns {
+	return NewCampaignsApiWithOptions(apiKey, httpClient, logger, limiter)
+}
+
+// NewCampaignsApiWithOptions creates a campaigns API with the given options.
+func NewCampaignsApiWithOptions(apiKey string, httpClient *http.Client, logger logger.Logger, limiter rate.Limiter, opts ...Option) *Campaigns {
 	return &Campaigns{
 		api: newApiClient(apiKey, httpClient, logger, limiter, opts...),
 	}

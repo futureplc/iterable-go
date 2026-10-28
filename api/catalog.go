@@ -23,7 +23,12 @@ type Catalog struct {
 	api *apiClient
 }
 
-func NewCatalogApi(apiKey string, httpClient *http.Client, logger logger.Logger, limiter rate.Limiter, opts ...Option) *Catalog {
+func NewCatalogApi(apiKey string, httpClient *http.Client, logger logger.Logger, limiter rate.Limiter) *Catalog {
+	return NewCatalogApiWithOptions(apiKey, httpClient, logger, limiter)
+}
+
+// NewCatalogApiWithOptions creates a catalog API with the given options.
+func NewCatalogApiWithOptions(apiKey string, httpClient *http.Client, logger logger.Logger, limiter rate.Limiter, opts ...Option) *Catalog {
 	return &Catalog{
 		api: newApiClient(apiKey, httpClient, logger, limiter, opts...),
 	}
